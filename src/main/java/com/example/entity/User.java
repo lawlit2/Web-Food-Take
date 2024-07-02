@@ -24,7 +24,7 @@ public class User extends Account implements Serializable {
     private String sex;
     /** 电话 */
     private String phone;
-
+    private String integral;
     public Integer getId() {
         return id;
     }

@@ -6,6 +6,8 @@ import com.example.common.enums.ResultCodeEnum;
 import com.example.entity.Business;
 import com.example.service.BusinessService;
 import com.github.pagehelper.PageInfo;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -89,5 +91,10 @@ public class BusinessController {
         PageInfo<Business> pageInfo = businessService.selectPage(business, pageNum, pageSize);
         return Result.success(pageInfo);
     }
-
+//    "根据商家地址返回商家"
+    @Operation(summary = "根据商家地址返回商家")
+    @PostMapping("/BusinessMessage/SelectMessage")
+    public Business SelectMessage(@Parameter(description = "地址") @RequestParam("address") String address){
+        return businessService.SelectBusinessByAddress(address);
+    }
 }

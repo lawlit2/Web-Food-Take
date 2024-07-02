@@ -7,6 +7,7 @@ import com.example.common.enums.ResultCodeEnum;
 import com.example.entity.User;
 import com.example.service.UserService;
 import com.github.pagehelper.PageInfo;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -91,6 +92,7 @@ public class UserController {
         PageInfo<User> page = userService.selectPage(user, pageNum, pageSize);
         return Result.success(page);
     }
+
     @PostMapping("/Integral/add")
     public String  AddIntegral(@RequestParam("id") int  id,
                                @RequestParam("integral") int integral){
@@ -104,6 +106,7 @@ public class UserController {
         }
         return JSON.toJSONString(result);
     }
+
     @PostMapping("/Integral/delete")
     public String DeleteIntegral(@RequestParam("id") int id){
         Map<String, Object> result = new HashMap<>();
@@ -116,6 +119,7 @@ public class UserController {
         }
         return JSON.toJSONString(result);
     }
+
     @PostMapping("/Integral/Select")
     public String SelectIntegral(@RequestParam("id") int id){
         Map<String, Object> result = new HashMap<>();

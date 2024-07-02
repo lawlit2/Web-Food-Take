@@ -215,4 +215,8 @@ public class BusinessService {
         }
     }
 
+    public Business SelectBusinessByAddress(String address) {
+        return  businessMapper.SelectBusinessByAddress(address);
+    }
+
 }
