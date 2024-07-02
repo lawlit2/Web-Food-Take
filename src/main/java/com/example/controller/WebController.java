@@ -38,10 +38,13 @@ public class WebController {
      */
     @PostMapping("/login")
     public Result login(@RequestBody Account account) {
-        if (ObjectUtil.isEmpty(account.getUsername()) || ObjectUtil.isEmpty(account.getPassword())
+        if ((ObjectUtil.isEmpty(account.getPhone()) && ObjectUtil.isEmpty(account.getUsername()))
+                || (!ObjectUtil.isEmpty(account.getPhone()) && !ObjectUtil.isEmpty(account.getUsername()))
+                || ObjectUtil.isEmpty(account.getPassword())
                 || ObjectUtil.isEmpty(account.getRole())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
+
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             account = adminService.login(account);
         } else if (RoleEnum.BUSINESS.name().equals(account.getRole())) {

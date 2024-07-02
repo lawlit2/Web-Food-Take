@@ -107,7 +107,7 @@ public class UserService {
      * 用户登录
      */
     public Account login(Account account) {
-        Account dbUser = this.selectByUsername(account.getUsername());
+        Account dbUser = this.selectByPhone(account.getPhone());
         if (ObjectUtil.isNull(dbUser)) {
             throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
         }
@@ -121,9 +121,9 @@ public class UserService {
         return dbUser;
     }
 
-    private User selectByUsername(String username) {
+    private User selectByPhone(String phone) {
         User user = new User();
-        user.setUsername(username);
+        user.setPhone(phone);
         List<User> userList = this.selectAll(user);
         return CollUtil.isEmpty(userList) ? null : userList.get(0);
     }
