@@ -5,7 +5,6 @@ import cn.hutool.core.util.ObjectUtil;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
-import com.example.entity.Business;
 import com.example.entity.User;
 import com.example.exception.CustomException;
 import com.example.mapper.UserMapper;
@@ -135,6 +134,26 @@ public class UserService {
         User user = new User();
         BeanUtils.copyProperties(account, user);  // 拷贝 账号和密码2个属性
         this.add(user);  // 添加账户信息
+    }
+
+
+    public boolean AddIntegralById(int id, int integral) {
+        return userMapper.UpdateIntegralById(id, integral) == 1;
+    }
+
+
+    public boolean DeleteIntegralById(int id) {
+        return userMapper.DeleteIntegralById(id) == 1;
+    }
+
+
+    public int SelectIntegralById(int id) {
+        Integer number = userMapper.SelectIntegralById(id);
+        if(number==null){
+            return 0;
+        }else {
+            return number;
+        }
     }
 
 }

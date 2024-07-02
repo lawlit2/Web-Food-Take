@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.alibaba.fastjson2.JSON;
 import com.example.common.Result;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.entity.User;
@@ -8,7 +9,9 @@ import com.example.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户表前端操作接口
@@ -88,5 +91,35 @@ public class UserController {
         PageInfo<User> page = userService.selectPage(user, pageNum, pageSize);
         return Result.success(page);
     }
-
+    @PostMapping("/Integral/add")
+    public String  AddIntegral(@RequestParam("id") int  id,
+                               @RequestParam("integral") int integral){
+        Map<String, Object> result = new HashMap<>();
+        if(userService.AddIntegralById(id,integral)){
+            result.put("message","积分修改/添加成功");
+            result.put("success",true);
+        }else{
+            result.put("message","积分修改/添加失败");
+            result.put("success",false);
+        }
+        return JSON.toJSONString(result);
+    }
+    @PostMapping("/Integral/delete")
+    public String DeleteIntegral(@RequestParam("id") int id){
+        Map<String, Object> result = new HashMap<>();
+        if(userService.DeleteIntegralById(id)){
+            result.put("message","积分删除成功");
+            result.put("success",true);
+        }else{
+            result.put("message","积分删除失败");
+            result.put("success",false);
+        }
+        return JSON.toJSONString(result);
+    }
+    @PostMapping("/Integral/Select")
+    public String SelectIntegral(@RequestParam("id") int id){
+        Map<String, Object> result = new HashMap<>();
+        result.put("Integral",userService.SelectIntegralById(id));
+        return JSON.toJSONString(result);
+    }
 }
