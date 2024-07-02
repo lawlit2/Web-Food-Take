@@ -19,6 +19,7 @@ public class Account {
     private String avatar;
 
     private String token;
+    private String phone;
 
     public Integer getId() {
         return id;
@@ -82,5 +83,13 @@ public class Account {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
