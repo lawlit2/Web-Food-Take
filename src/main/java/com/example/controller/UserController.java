@@ -121,9 +121,10 @@ public class UserController {
     }
 
     @PostMapping("/Integral/Select")
-    public String SelectIntegral(@RequestParam("id") int id){
+    public String SelectIntegral(@RequestBody Map<String, Object> payload) {
+        int id = (int) payload.get("id");
         Map<String, Object> result = new HashMap<>();
-        result.put("Integral",userService.SelectIntegralById(id));
+        result.put("Integral", userService.SelectIntegralById(id));
         return JSON.toJSONString(result);
     }
 }
