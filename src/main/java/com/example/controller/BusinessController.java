@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.example.common.Result;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.entity.Business;
+import com.example.entity.Province;
 import com.example.service.BusinessService;
 import com.github.pagehelper.PageInfo;
 
@@ -95,6 +96,10 @@ public class BusinessController {
 
     @PostMapping("/BusinessMessage/SelectMessage")
     public Business SelectMessage(@RequestBody Map<String,String> address){
-        return businessService.SelectBusinessByAddress(address.get("address"));
+        return businessService.SelectBusinessByAddress(address.get("province"),address.get("city"));
+    }
+    @PostMapping("/BusinessMessage/SelectLocation")
+    public  List<Province> getProvinceAndCity() {
+        return businessService.getProvinceAndCities();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.entity.Business;
+import com.example.entity.Location;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -17,7 +18,9 @@ public interface BusinessMapper {
     int updateById(Business business);
 
     int deleteById(Integer id);
-    @Select("Select * from business where address = #{address}")
-    Business SelectBusinessByAddress(String address);
+    @Select("Select * from business where province = #{province} AND city = #{city}")
+    Business SelectBusinessByAddress(String province,String city);
 
+    @Select("SELECT DISTINCT province, city FROM business")
+    List<Location> SelectLocation();
 }
