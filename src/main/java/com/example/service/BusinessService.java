@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 商家相关的业务方法
@@ -215,8 +214,35 @@ public class BusinessService {
         }
     }
 
-    public Business SelectBusinessByAddress(String address) {
-        return  businessMapper.SelectBusinessByAddress(address);
+    public Business SelectBusinessByAddress(String province,String city) {
+        return  businessMapper.SelectBusinessByAddress(province, city);
+    }
+
+    public List<Province> getProvinceAndCities() {
+        int id=1;
+        List<Location> list = businessMapper.SelectLocation();
+        Map<String,List<String>> provinceCityMap = new HashMap<>();
+        for (Location location : list) {
+            provinceCityMap
+                    .computeIfAbsent(location.getProvince(),k->new ArrayList<>())
+                    .add(location.getCity());
+        }
+        List<Province> provinces = new ArrayList<>();
+        for (Map.Entry<String, List<String>> stringListEntry : provinceCityMap.entrySet()) {
+            Province province = new Province();
+            province.setName(stringListEntry.getKey());
+            province.setId(id++);
+            List<City> cities = new ArrayList<>();
+            for (String s : stringListEntry.getValue()) {
+                City city = new City();
+                city.setName(s);
+                city.setId(id++);
+                cities.add(city);
+            }
+            province.setChild(cities);
+            provinces.add(province);
+        }
+        return provinces;
     }
 
 }
