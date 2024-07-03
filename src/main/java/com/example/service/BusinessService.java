@@ -213,11 +213,11 @@ public class BusinessService {
             }
         }
     }
-
+//根据商家地址返回相关信息
     public List<Business> SelectBusinessByAddress(String province,String city) {
         return  businessMapper.SelectBusinessByAddress(province, city);
     }
-
+//返回地区
     public List<Province> getProvinceAndCities() {
         int id=1;
         List<Location> list = businessMapper.SelectLocation();
@@ -244,5 +244,51 @@ public class BusinessService {
         }
         return provinces;
     }
+//每周可配送时间
+
+    public String SelectDeliveryTime(int id) {
+        try {
+            return businessMapper.SelectDeliveryTime(id);
+        }catch (NullPointerException e){
+            return "null";
+        }
+    }
+
+    public boolean DeleteDeliveryTime(int id) {
+        Integer integer = businessMapper.DeleteDeliveryTime(id);
+        return integer != null;
+    }
+
+
+    public boolean UpdateDeliveryTime(String time, int id) {
+        Integer integer = businessMapper.UpdateDeliveryTime(time,id);
+        return integer != null;
+    }
+//可配送时间段
+
+    public boolean UpdateTimeWindow(String time, int id) {
+        Integer integer = businessMapper.UpdateTimeWindow(time, id);
+        return integer != null;
+    }
+
+
+    public boolean DeleteTimeWindow(int id) {
+        Integer integer = businessMapper.DeleteTimeWindow(id);
+        return integer!=null;
+    }
+
+
+    public String SelectTimeWindow(int id) {
+        try{
+            String s = businessMapper.SelectTimeWindow(id);
+            if(s == null){
+                return "null";
+            }
+            return  s;
+        }catch (Exception e){
+            return  "null";
+        }
+    }
+
 
 }

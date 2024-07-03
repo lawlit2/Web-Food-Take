@@ -102,4 +102,5 @@ public class BusinessController {
     public  List<Province> getProvinceAndCity() {
         return businessService.getProvinceAndCities();
     }
+
 }
