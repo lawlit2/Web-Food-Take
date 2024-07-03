@@ -95,7 +95,7 @@ public class BusinessController {
 //    "根据商家地址返回商家"
 
     @PostMapping("/BusinessMessage/SelectMessage")
-    public Business SelectMessage(@RequestBody Map<String,String> address){
+    public List<Business> SelectMessage(@RequestBody Map<String,String> address){
         return businessService.SelectBusinessByAddress(address.get("province"),address.get("city"));
     }
     @GetMapping("/BusinessMessage/SelectLocation")

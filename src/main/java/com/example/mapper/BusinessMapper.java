@@ -19,7 +19,7 @@ public interface BusinessMapper {
 
     int deleteById(Integer id);
     @Select("Select * from business where province = #{province} AND city = #{city}")
-    Business SelectBusinessByAddress(String province,String city);
+    List<Business> SelectBusinessByAddress(String province,String city);
 
     @Select("SELECT DISTINCT province, city FROM business")
     List<Location> SelectLocation();

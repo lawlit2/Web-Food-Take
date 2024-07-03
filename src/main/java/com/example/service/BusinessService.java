@@ -214,7 +214,7 @@ public class BusinessService {
         }
     }
 
-    public Business SelectBusinessByAddress(String province,String city) {
+    public List<Business> SelectBusinessByAddress(String province,String city) {
         return  businessMapper.SelectBusinessByAddress(province, city);
     }
 
