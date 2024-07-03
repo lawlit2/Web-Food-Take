@@ -6,12 +6,12 @@ import com.example.common.enums.ResultCodeEnum;
 import com.example.entity.Business;
 import com.example.service.BusinessService;
 import com.github.pagehelper.PageInfo;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商家管理相关接口
@@ -92,9 +92,9 @@ public class BusinessController {
         return Result.success(pageInfo);
     }
 //    "根据商家地址返回商家"
-    @Operation(summary = "根据商家地址返回商家")
+
     @PostMapping("/BusinessMessage/SelectMessage")
-    public Business SelectMessage(@Parameter(description = "地址") @RequestParam("address") String address){
-        return businessService.SelectBusinessByAddress(address);
+    public Business SelectMessage(@RequestBody Map<String,String> address){
+        return businessService.SelectBusinessByAddress(address.get("address"));
     }
 }

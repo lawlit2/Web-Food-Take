@@ -89,4 +89,11 @@ public class User extends Account implements Serializable {
         this.phone = phone;
     }
 
+    public String getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(String integral) {
+        this.integral = integral;
+    }
 }
