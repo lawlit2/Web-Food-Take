@@ -18,9 +18,9 @@ public interface BusinessMapper {
     int updateById(Business business);
 
     int deleteById(Integer id);
-    @Select("Select * from business where province = #{province} AND city = #{city}")
+    @Select("Select * from business where province = #{province} AND city = #{city} AND status = '通过'")
     List<Business> SelectBusinessByAddress(String province,String city);
 
-    @Select("SELECT DISTINCT province, city FROM business")
+    @Select("SELECT DISTINCT province, city FROM business where status = '通过'")
     List<Location> SelectLocation();
 }
